@@ -58,10 +58,6 @@ class WC_MNM_Checkboxes {
 
 		// QuickView support.
 		add_action( 'wc_quick_view_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
-
-		// Add to cart validation.
-		add_filter( 'woocommerce_mnm_add_to_cart_validation', array( __CLASS__, 'weight_validation' ) );
-
     }
 
 
