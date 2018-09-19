@@ -5,8 +5,18 @@
         // Unbind MNM triggers.
         container.$mnm_reset.off();
 
+        // Replace .mnm_price div.
+        container.$mnm_price.remove();
+
+        // Add a div to hold the new price.
+		var $price = container.$mnm_cart.find( '.mnm_checkbox_price' );
+
+		if ( ! $price.length ){
+			$('<div class="mnm_checkbox_price"></div>').hide().prependTo(container.$mnm_cart.find('.mnm_button_wrap' ));
+		}
+
         // Reset link.
-		container.$mnm_reset.on( 'click', function( event ) { console.log('wtf');
+		container.$mnm_reset.on( 'click', function( event ) {
 			
 			event.preventDefault();
 
@@ -26,12 +36,7 @@
 
 		var min_container_size  = container.get_min_container_size();
 		var max_container_size  = container.get_max_container_size();
-
-		var per_item_pricing    = container.$mnm_cart.data( 'per_product_pricing' );
 		var total_qty           = 0;
-		var total_price         = parseFloat( container.$mnm_cart.data( 'base_price' ) );
-		var total_regular_price = parseFloat( container.$mnm_cart.data( 'base_regular_price' ) );
-		var formatted_price     = '';
 		var error_message 		= '';
 
 		// Reset status/error messages state.
@@ -50,10 +55,6 @@
 				quantity   = $input.is(':checked') ? parseInt( $input.val() ) : 0;
 				total_qty += quantity;
 
-				if ( per_item_pricing == true ) {
-					total_price         += parseFloat( $(this).data( 'price' ) ) * quantity;
-					total_regular_price += parseFloat( $(this).data( 'regular_price' ) ) * quantity;
-				}
 			}
 		
 		} );
@@ -86,5 +87,79 @@
 			container.add_message( error_message.replace( '%v', selected_qty_message ), 'error' );
 		}
     } );
+
+
+    // Update the price.
+    $( '.mnm_form' ).on( 'wc-mnm-price-updated', function( event, container, total_qty, $mnm_price ) { 
+
+		var per_item_pricing    = container.$mnm_cart.data( 'per_product_pricing' );
+		var total_qty           = 0;
+		var total_price         = parseFloat( container.$mnm_cart.data( 'base_price' ) );
+		var total_regular_price = parseFloat( container.$mnm_cart.data( 'base_regular_price' ) );
+		var formatted_price     = '';
+
+		// Price calculation copied from MNM.
+		if ( per_item_pricing == true ) {
+
+			container.$mnm_items.each( function() {
+
+				var quantity = 0;
+
+				$input = $(this).find( '.qty' );
+
+				if ( $input.length > 0 ) {
+
+					// Calculate total container quantity.
+					quantity   = $input.is(':checked') ? parseInt( $input.val() ) : 0;
+					total_qty += quantity;
+
+					if ( per_item_pricing == true ) {
+						total_price         += parseFloat( $(this).data( 'price' ) ) * quantity;
+						total_regular_price += parseFloat( $(this).data( 'regular_price' ) ) * quantity;
+					}
+
+				}
+			
+			} );
+
+			// Trigger addons update to refresh addons totals.
+			var mnm_addon = container.$mnm_form.find( '.mnm_cart #product-addons-total' );
+
+			if ( mnm_addon.length > 0 ) {
+				mnm_addon.data( 'price', total_price );
+				container.$mnm_cart.trigger( 'woocommerce-product-addons-update' );
+			}
+
+			if ( total_qty > 0 ) {
+				if ( total_price == 0 ) {
+
+					formatted_price = '<p class="price"><span class="total"></span>'+ wc_mnm_params.i18n_free +'</p>';
+
+				} else {
+
+					var price_format         = wc_mnm_woocommerce_number_format( wc_mnm_number_format( total_price ) );
+					var regular_price_format = wc_mnm_woocommerce_number_format( wc_mnm_number_format( total_regular_price ) );
+
+					if ( total_regular_price > total_price ) {
+						formatted_price = '<p class="price"><del>' + regular_price_format + '</del> <ins>' + price_format + '</ins></p>';
+					} else {
+						formatted_price = '<p class="price">' + price_format + '</p>';
+					}
+				}
+			}
+
+			// Update price.
+			if ( formatted_price !== '' ) {
+				container.$mnm_cart.find( '.mnm_checkbox_price' ).html( formatted_price );
+				// Show price.
+				container.$mnm_cart.find( '.mnm_checkbox_price' ).slideDown( 200 );
+			} else {
+				// Hide price.
+				container.$mnm_cart.find( '.mnm_checkbox_price' ).slideUp( 200 );
+			}
+
+		}
+
+	} );
 
 } ) ( jQuery, window, document );
