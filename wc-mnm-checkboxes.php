@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Mix and Match: Checkboxes
  * Plugin URI: http://www.woocommerce.com/products/woocommerce-mix-and-match-products/
  * Description: Convert quantity inputs to checkboxes
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Kathy Darling
  * Author URI: http://kathyisawesome.com/
  * Developer: Kathy Darling, Manos Psychogyiopoulos
@@ -28,8 +28,8 @@ class WC_MNM_Checkboxes {
 	/**
 	 * constants
 	 */
-	CONST VERSION = '1.0.0';
-	CONST REQUIRED_WOO = '3.3.0';
+	CONST VERSION = '1.0.1';
+	CONST REQUIRED_WOO = '3.4.0';
 
 	/**
 	 * WC_MNM_Checkboxes Constructor
