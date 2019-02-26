@@ -2,8 +2,8 @@
 /**
  * Plugin Name: WooCommerce Mix and Match: Checkboxes
  * Plugin URI: http://www.woocommerce.com/products/woocommerce-mix-and-match-products/
- * Description: Convert quantity inputs to checkboxes
- * Version: 1.0.1
+ * Description: Convert quantity inputs to checkboxes. Requires Mix and Match 1.4.1+
+ * Version: 1.1.0
  * Author: Kathy Darling
  * Author URI: http://kathyisawesome.com/
  * Developer: Kathy Darling, Manos Psychogyiopoulos
@@ -17,19 +17,12 @@
  */
 
 
-
 /**
  * The Main WC_MNM_Checkboxes class
  **/
 if ( ! class_exists( 'WC_MNM_Checkboxes' ) ) :
 
 class WC_MNM_Checkboxes {
-
-	/**
-	 * constants
-	 */
-	CONST VERSION = '1.0.1';
-	CONST REQUIRED_WOO = '3.4.0';
 
 	/**
 	 * WC_MNM_Checkboxes Constructor
@@ -50,14 +43,6 @@ class WC_MNM_Checkboxes {
 		add_action( 'woocommerce_before_mnm_items', array( __CLASS__, 'maybe_change_template' ) );
 		add_action( 'woocommerce_after_mnm_items', array( __CLASS__, 'remove_plugin_template' ) );
 
-		// Register Scripts.
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'register_scripts' ) );
-
-		// Display Scripts.
-		add_action( 'woocommerce_mix-and-match_add_to_cart', array( __CLASS__, 'load_scripts' ) );
-
-		// QuickView support.
-		add_action( 'wc_quick_view_enqueue_scripts', array( __CLASS__, 'load_scripts' ) );
     }
 
 
@@ -144,30 +129,6 @@ class WC_MNM_Checkboxes {
 		
 		return $template;
 	}
-
-
-	/*-----------------------------------------------------------------------------------*/
-	/* Scripts and Styles */
-	/*-----------------------------------------------------------------------------------*/
-
-	/**
-	 * Register scripts
-	 *
-	 * @return void
-	 */
-	public static function register_scripts() {
-		wp_register_script( 'wc-mnm-checkboxes', plugins_url( 'assets/js/wc-mnm-checkboxes.js', __FILE__ ), array( 'wc-add-to-cart-mnm' ), time(), true );
-	}
-
-
-	/**
-	 * Load the script anywhere the MNN add to cart button is displayed
-	 * @return void
-	 */
-	public static function load_scripts(){
-		wp_enqueue_script( 'wc-mnm-checkboxes' );
-	}
-
 
 } //end class: do not remove or there will be no more guacamole for you
 

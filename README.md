@@ -1,9 +1,11 @@
 # WooCommerce Mix and Match: Checkboxes
 Convert Mix and Match quantity inputs to checkboxes
 
+## Version Requirements
+1. Version 1.1.0 of this checkboxes plugin requires Mix and Match 1.4.1.\
+
 ## Notes
 1. This is proof of concept and not officially supported in any way.
-2. Per-item price calculations are not currently supported.
 
 ## Configure product option
 ![WooCommerce product data metabox with arrow pointing to checkbox setting](https://user-images.githubusercontent.com/507025/44285465-bbbe2f00-a265-11e8-9907-24ac617a77e8.png)

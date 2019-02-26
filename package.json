@@ -1,7 +1,7 @@
 {
   "title": "WooCommerce Mix and Match: Checkboxes",
   "name": "wc-mnm-checkboxes",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Switch Mix and Match quantity options to checkboxes",
   "main": "Gruntfile.js",
   "license": "GPL-3.0",
@@ -17,6 +17,6 @@
     "grunt": "~1.0.1",
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-i18n": "~1.0.1",
-    "load-grunt-tasks": "~3.5.0"
+    "load-grunt-tasks": "~4.0.0"
   }
 }
