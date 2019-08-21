@@ -17,6 +17,6 @@
     "grunt": "~1.0.4",
     "grunt-text-replace": "^0.4.0",
     "grunt-wp-i18n": "~1.0.3",
-    "load-grunt-tasks": "~5.0.0"
+    "load-grunt-tasks": "~5.1.0"
   }
 }
