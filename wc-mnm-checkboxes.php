@@ -43,6 +43,9 @@ class WC_MNM_Checkboxes {
 		add_action( 'woocommerce_before_mnm_items', array( __CLASS__, 'maybe_change_template' ) );
 		add_action( 'woocommerce_after_mnm_items', array( __CLASS__, 'remove_plugin_template' ) );
 
+		// Tiny style to reset checkboxs to original widths.
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_styles' ) );
+
     }
 
 
@@ -128,6 +131,19 @@ class WC_MNM_Checkboxes {
 		}
 		
 		return $template;
+	}
+
+
+	/**
+	 * Add a tiny style.
+	 */
+	public static function add_styles() { ?>
+		<style>
+			.single-product form.mnm_form .mnm-checkbox {
+			    width: initial;
+			}
+		</style>
+		<?php
 	}
 
 } //end class: do not remove or there will be no more guacamole for you
