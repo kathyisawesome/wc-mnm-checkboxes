@@ -124,7 +124,7 @@ class WC_MNM_Checkboxes {
 	 * @param string $default_path  Default path. (default: '').
 	 * @return string
 	 */
-	public static function plugin_template( $template, $template_name, $template_path ){
+	public static function plugin_template( $template, $template_name, $template_path ) {
 		if( 'single-product/mnm/mnm-product-quantity.php' == $template_name ) {
 			$new_template = plugin_dir_path( __FILE__ ) . 'templates/' . $template_name;
 			$template = file_exists( $new_template ) ? $new_template : $template;
