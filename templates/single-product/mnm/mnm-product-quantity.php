@@ -14,7 +14,7 @@
  * @author  Kathy Darling
  * @package WooCommerce Mix and Match/Templates
  * @since   1.0.0
- * @version 1.3.0
+ * @version 1.2.0
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ){
@@ -27,11 +27,29 @@ $mnm_id = $mnm_item->get_id();
 
 if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 
-	$quantity = isset( $_REQUEST[ 'mnm_quantity' ] ) && isset( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ) ? 1 : 0;
+	$input_name = wc_mnm_get_child_input_name( $product->get_id() );
+	$input_id = $product->get_id() . '-' . $input_name . '-' . $mnm_item->get_id();
 
-	printf( '<input type="checkbox" class="qty mnm-quantity" name="mnm_quantity[%s]" value="1" %s min="1" max="1" />',
-	    $mnm_id,
-	    checked( $quantity, 1, false )
+	$max_quantity = $product->get_child_quantity( 'max', $mnm_id );
+
+	$checkbox_label = sprintf( __( '+Add %1$d <span class="screen-reader-text">%2$s</span>', 'wc-mnm-checkboxes' ),
+		$max_quantity,
+		$mnm_item->get_title()
+	);
+	$checked_quantity = isset( $_REQUEST[ 'mnm_quantity' ] ) && isset( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ) ? intval( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ): 0;
+	$is_checked = $checked_quantity === $max_quantity;
+
+	printf( '<label for="%s">%s</label>',
+		esc_attr( $input_id ),
+		wp_kses_post( $checkbox_label )
+	);
+
+	printf( '<input id="%s" type="checkbox" class="mnm-quantity mnm-checkbox qty" name="%s[%s]" value="%s" %s/>',
+		esc_attr( $input_id ),
+	    esc_attr( $input_name ),
+	    esc_attr( $mnm_id ),
+	    esc_attr( $max_quantity ),
+	    checked( $is_checked, true, false )
 	);
 
 } else {
