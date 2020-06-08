@@ -46,6 +46,9 @@ class WC_MNM_Checkboxes {
 		// Tiny style to reset checkboxs to original widths.
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'add_styles' ) );
 
+		// Add max child quantity to 1 early so it can be modified by other filters.
+		add_action( 'woocommerce_mnm_quantity_input_max', array( __CLASS__, 'apply_max_limit' ), 0, 3 );
+
     }
 
 
@@ -144,6 +147,23 @@ class WC_MNM_Checkboxes {
 			}
 		</style>
 		<?php
+	}
+
+
+	/*-----------------------------------------------------------------------------------*/
+	/* Cart validation                                                                   */
+	/*-----------------------------------------------------------------------------------*/
+
+	/**
+	 * Limit the max to 1 early so it can be overriden.
+	 *
+	 * @param  int $qty Quantity.
+	 * @param  obj WC_Product $child_product
+	 * @param  obj WC_Product_Mix_and_Match $container_product
+	 * @return string
+	 */
+	public static function apply_max_limit( $qty, $child_product, $container_product ) {
+		return 1;
 	}
 
 } //end class: do not remove or there will be no more guacamole for you
