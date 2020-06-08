@@ -2,7 +2,7 @@
 Convert Mix and Match quantity inputs to checkboxes
 
 ## Version Requirements
-1. Version 1.1.0 of this checkboxes plugin requires Mix and Match 1.4.1.\
+1. Version 1.1.0 of this checkboxes plugin requires Mix and Match 1.4.1.
 
 ## Notes
 1. This is proof of concept and not officially supported in any way.
