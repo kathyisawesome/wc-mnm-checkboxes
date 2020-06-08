@@ -41,7 +41,7 @@ if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 		$is_checked = true;
 		$input_type = 'hidden';
 	} else {
-		$checkbox_label = sprintf( __( '+Add %1$d <span class="screen-reader-text">%2$s</span>', 'wc-mnm-checkboxes' ),
+		$checkbox_label = sprintf( __( 'Add %1$d <span class="screen-reader-text">%2$s</span>', 'wc-mnm-checkboxes' ),
 			$max_quantity,
 			$mnm_item->get_title()
 		);
