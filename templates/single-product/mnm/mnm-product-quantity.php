@@ -30,22 +30,34 @@ if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 	$input_name = wc_mnm_get_child_input_name( $product->get_id() );
 	$input_id = $product->get_id() . '-' . $input_name . '-' . $mnm_item->get_id();
 
+	$min_quantity = $product->get_child_quantity( 'min', $mnm_id );
 	$max_quantity = $product->get_child_quantity( 'max', $mnm_id );
 
-	$checkbox_label = sprintf( __( '+Add %1$d <span class="screen-reader-text">%2$s</span>', 'wc-mnm-checkboxes' ),
-		$max_quantity,
-		$mnm_item->get_title()
-	);
-	$checked_quantity = isset( $_REQUEST[ 'mnm_quantity' ] ) && isset( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ) ? intval( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ): 0;
-	$is_checked = $checked_quantity === $max_quantity;
+	if ( $min_quantity === $max_quantity ) {
+		$checkbox_label = sprintf( __( '%1$d <span class="screen-reader-text">%2$s</span> required', 'wc-mnm-checkboxes' ),
+			$max_quantity,
+			$mnm_item->get_title()
+		);
+		$is_checked = true;
+		$input_type = 'hidden';
+	} else {
+		$checkbox_label = sprintf( __( '+Add %1$d <span class="screen-reader-text">%2$s</span>', 'wc-mnm-checkboxes' ),
+			$max_quantity,
+			$mnm_item->get_title()
+		);
+		$checked_quantity = isset( $_REQUEST[ 'mnm_quantity' ] ) && isset( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ) ? intval( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ): 0;
+		$is_checked = $checked_quantity === $max_quantity;
+		$input_type = 'checkbox';
+	}
 
 	printf( '<label for="%s">%s</label>',
 		esc_attr( $input_id ),
 		wp_kses_post( $checkbox_label )
 	);
 
-	printf( '<input id="%s" type="checkbox" class="mnm-quantity mnm-checkbox qty" name="%s[%s]" value="%s" %s/>',
+	printf( '<input id="%s" type="%s" class="mnm-quantity mnm-checkbox qty" name="%s[%s]" value="%s" %s/>',
 		esc_attr( $input_id ),
+		esc_attr( $input_type ),
 	    esc_attr( $input_name ),
 	    esc_attr( $mnm_id ),
 	    esc_attr( $max_quantity ),
