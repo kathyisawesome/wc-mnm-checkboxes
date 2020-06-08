@@ -50,11 +50,6 @@ if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 		$input_type = 'checkbox';
 	}
 
-	printf( '<label for="%s">%s</label>',
-		esc_attr( $input_id ),
-		wp_kses_post( $checkbox_label )
-	);
-
 	printf( '<input id="%s" type="%s" class="mnm-quantity mnm-checkbox qty" name="%s[%s]" value="%s" %s/>',
 		esc_attr( $input_id ),
 		esc_attr( $input_type ),
@@ -62,6 +57,11 @@ if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 	    esc_attr( $mnm_id ),
 	    esc_attr( $max_quantity ),
 	    checked( $is_checked, true, false )
+	);
+
+	printf( '<label for="%s">%s</label>',
+		esc_attr( $input_id ),
+		wp_kses_post( $checkbox_label )
 	);
 
 } else {
