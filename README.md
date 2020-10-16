@@ -1,6 +1,9 @@
 # WooCommerce Mix and Match: Checkboxes
 Convert Mix and Match quantity inputs to checkboxes
 
+![a table of t-shirt products each with a checkbox and label that says "add one"](https://user-images.githubusercontent.com/507025/96287732-9ccf9a80-0f9f-11eb-965b-e79f3a250ba8.png)
+
+
 ## Version Requirements
 1. Version 1.1.0 of this checkboxes plugin requires Mix and Match 1.4.1.
 
