@@ -163,7 +163,10 @@ class WC_MNM_Checkboxes {
 	 * @return string
 	 */
 	public static function apply_max_limit( $qty, $child_product, $container_product ) {
-		return 1;
+		if ( 'yes' == $container_product->get_meta( '_mnm_checkboxes', true, 'edit' ) ) {
+			$qty = max( 1, $qty );
+		}
+		return $qty;
 	}
 
 } //end class: do not remove or there will be no more guacamole for you
