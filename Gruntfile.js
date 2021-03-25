@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 				potFilename: 'wc-mnm-checkboxes.pot', // Name of the POT file.
 				type: 'wp-plugin', // Type of project (wp-plugin or wp-theme).
 				potHeaders: {
-                    'Report-Msgid-Bugs-To': 'https://github.com/helgatheviking/wc-mnm-checkboxes/issues/'
+                    'Report-Msgid-Bugs-To': 'https://github.com/kathyisawesome/wc-mnm-checkboxes/issues/'
                 } 
 			}
 		}
@@ -67,6 +67,6 @@ module.exports = function(grunt) {
 		}
 	}
 
-});
+  });
 
 };
