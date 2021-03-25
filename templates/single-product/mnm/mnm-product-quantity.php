@@ -14,7 +14,7 @@
  * @author  Kathy Darling
  * @package WooCommerce Mix and Match/Templates
  * @since   1.0.0
- * @version 1.2.0
+ * @version 1.2.1
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ){
@@ -45,7 +45,8 @@ if ( $mnm_item->is_purchasable() && $mnm_item->is_in_stock() ) {
 			$max_quantity,
 			$mnm_item->get_title()
 		);
-		$checked_quantity = isset( $_REQUEST[ 'mnm_quantity' ] ) && isset( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ) ? intval( $_REQUEST[ 'mnm_quantity' ][ $mnm_id ] ): 0;
+		$checked_quantity = isset( $_REQUEST[ $input_name ] ) && ! empty ( $_REQUEST[ $input_name ][ $child_id ] ) ? intval( $_REQUEST[ $input_name ][ $child_id ] ) : apply_filters( 'woocommerce_mnm_quantity_input', 0, $mnm_item, $product );
+
 		$is_checked = $checked_quantity === $max_quantity;
 		$input_type = 'checkbox';
 	}
