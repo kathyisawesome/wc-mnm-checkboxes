@@ -90,7 +90,7 @@ class WC_MNM_Checkboxes {
 	 * @param  WC_Product_Mix_and_Match  $mnm_product_object
 	 */
 	public static function process_meta( $product ) {
-		if( isset( $_POST[ '_mnm_checkboxes' ] ) ) {
+		if ( isset( $_POST[ '_mnm_checkboxes' ] ) ) {
 			$product->update_meta_data( '_mnm_checkboxes', 'yes' );
 		} else {
 			$product->update_meta_data( '_mnm_checkboxes', 'no' );
@@ -107,7 +107,7 @@ class WC_MNM_Checkboxes {
 	 */
 	public static function maybe_change_template() {
 		global $product;
-		if( 'yes' == $product->get_meta( '_mnm_checkboxes', true, 'edit' ) ) {
+		if ( 'yes' == $product->get_meta( '_mnm_checkboxes', true, 'edit' ) ) {
 			add_filter( 'woocommerce_locate_template', array( __CLASS__, 'plugin_template' ), 10, 3 );
 		}
 	}
@@ -128,7 +128,7 @@ class WC_MNM_Checkboxes {
 	 * @return string
 	 */
 	public static function plugin_template( $template, $template_name, $template_path ) {
-		if( 'single-product/mnm/mnm-product-quantity.php' == $template_name ) {
+		if ( 'single-product/mnm/mnm-product-quantity.php' == $template_name ) {
 			$new_template = plugin_dir_path( __FILE__ ) . 'templates/' . $template_name;
 			$template = file_exists( $new_template ) ? $new_template : $template;
 		}
