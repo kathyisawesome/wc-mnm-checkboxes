@@ -164,7 +164,7 @@ class WC_MNM_Checkboxes {
 	 */
 	public static function apply_max_limit( $qty, $child_product, $container_product ) {
 		if ( 'yes' == $container_product->get_meta( '_mnm_checkboxes', true, 'edit' ) ) {
-			$qty = max( 1, $qty );
+			$qty = 1;
 		}
 		return $qty;
 	}
