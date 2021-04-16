@@ -1,7 +1,7 @@
 {
   "title": "WooCommerce Mix and Match: Checkboxes",
   "name": "wc-mnm-checkboxes",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Switch Mix and Match quantity options to checkboxes",
   "main": "Gruntfile.js",
   "license": "GPL-3.0",
