@@ -142,9 +142,8 @@ class WC_MNM_Checkboxes {
 	 */
 	public static function add_styles() { ?>
 		<style>
-			.single-product form.mnm_form .mnm-checkbox {
-			    width: initial;
-			}
+			.single-product .mnm_form .mnm-checkbox { width: initial; }
+			.theme-twentytwentyone .mnm_form .mnm-checkbox { width: 25px; height: 25px; }
 		</style>
 		<?php
 	}
