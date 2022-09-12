@@ -1,6 +1,6 @@
 <?php
 /**
- * Mix and Match Product Quantity
+ * DEPRECATED: Mix and Match Product Quantity - Checkbox display handled in core.
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/single-product/mnm/mnm-product-quantity.php.
  *
@@ -15,6 +15,7 @@
  * @package WooCommerce Mix and Match/Templates
  * @since   1.0.0
  * @version 1.2.1
+ * @deprecated 2.0.0
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ){
